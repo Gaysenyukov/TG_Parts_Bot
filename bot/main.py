@@ -1,11 +1,25 @@
 import os
+import logging
+
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 from config import token
+
 from api import AbcpClient
 from services import SearchService
 from bot.handlers import start, text_router
 
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+)
+
+logger = logging.getLogger(__name__)
+
+
 def main():
+    logger.info("Bot starting…")
+
     login = os.environ.get("USERLOGIN")
     password = os.environ.get("USERPASS")
 
